@@ -1,28 +1,17 @@
-var cloneArray = function(array) {
-  return array.slice();
-};
+var objectCloner = require('./lib/ObjectCloner.js');
+var arrayCloner = require('./lib/ArrayCloner.js');
+var dateCloner = require('./lib/DateCloner.js');
 
-var getValue = function(value) {
-  if(value instanceof Array) {
-    return cloneArray(value);
-  } else if(value instanceof Date) {
-    return new Date(value);
-  } else if(value instanceof Object) {
-    return clone(value);
+var clone = function(valueToClone) {
+  if(valueToClone instanceof Array) {
+    return arrayCloner.clone(valueToClone);
+  } else if(valueToClone instanceof Date) {
+    return dateCloner.clone(valueToClone);
+  } else if(valueToClone instanceof Object) {
+    return objectCloner.clone(valueToClone);
+  } else {
+    return valueToClone;
   }
-  return value;
-};
-
-var clone = function(object) {
-  var cloned = {};
-  Object.keys(object).forEach(function(key) {
-    if(object[key] === object){
-      cloned[key] = cloned;
-    }else{
-      cloned[key] = getValue(object[key]);
-    }
-  });
-  return cloned;
 };
 
 exports.clone = clone;
