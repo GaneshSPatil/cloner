@@ -4,7 +4,7 @@
   "description": "a simple cloner library for creating a copy of javascript objects",
   "main": "cloner.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha --recursive"
   },
   "author": "Ganesh Patil",
   "license": "ISC",
