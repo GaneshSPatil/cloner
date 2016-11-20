@@ -10,7 +10,7 @@ describe('Object Cloner', function() {
   });
 
   it('should clone object with premitive values', function() {
-    var actual = {a: 10, b: 'foo'};
+    var actual = {a: 10, b: 'foo', c: true};
     var cloned = cloner.clone(actual);
     expect(actual).to.eql(cloned);
     expect(actual).not.to.equal(cloned);
@@ -22,6 +22,7 @@ describe('Object Cloner', function() {
     var cloned = cloner.clone(actual);
     expect(actual).to.eql(cloned);
     expect(actual).not.to.equal(cloned);
+
     expect(numbers).to.eql(cloned.num);
     expect(numbers).not.to.equal(cloned.num);
   });
@@ -32,6 +33,7 @@ describe('Object Cloner', function() {
     var cloned = cloner.clone(actual);
     expect(actual).to.eql(cloned);
     expect(actual).not.to.equal(cloned);
+
     expect(alphabetOrder).to.eql(cloned.alphabets);
     expect(alphabetOrder).not.to.equal(cloned.alphabets);
   });
@@ -42,6 +44,7 @@ describe('Object Cloner', function() {
     var cloned = cloner.clone(actual);
     expect(actual).to.eql(cloned);
     expect(actual).not.to.equal(cloned);
+
     expect(now).to.eql(cloned.now);
     expect(now).not.to.equal(cloned.now);
   });
@@ -60,8 +63,28 @@ describe('Object Cloner', function() {
     var cloned = cloner.clone(actual);
     expect(actual).to.eql(cloned);
     expect(actual).not.to.equal(cloned);
+
     expect(numbers).to.eql(cloned.foo.bar.baz.numbers);
     expect(numbers).not.to.equal(cloned.foo.bar.baz.numbers);
+  });
+
+  it('should clone object having values as arrays of objects', function() {
+    var numbers = {one: 1, two: 2};
+    var alphabetsOrder = {a: 1, b: 2};
+    var collection = [numbers, alphabetsOrder];
+    var actual = { data: collection};
+    var cloned = cloner.clone(actual);
+    expect(actual).to.eql(cloned);
+    expect(actual).not.to.equal(cloned);
+
+    expect(collection).to.eql(cloned.data);
+    expect(collection).not.to.equal(cloned.data);
+
+    expect(numbers).to.eql(cloned.data[0]);
+    expect(numbers).not.to.equal(cloned.data[0]);
+
+    expect(alphabetsOrder).to.eql(cloned.data[1]);
+    expect(alphabetsOrder).not.to.equal(cloned.data[1]);
   });
 
   it('should clone the objects with self reference', function() {
@@ -70,6 +93,7 @@ describe('Object Cloner', function() {
     var cloned = cloner.clone(actual);
     expect(actual).to.eql(cloned);
     expect(actual).not.to.equal(cloned);
+
     expect(actual).to.eql(cloned.self);
     expect(actual).not.to.equal(cloned.self);
   });
