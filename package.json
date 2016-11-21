@@ -6,6 +6,11 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GaneshSPatil/cloner.git"
+  },
+  "keywords": ["clone", "cloner", "copy"],
   "author": "Ganesh Patil",
   "license": "ISC",
   "devDependencies": {
